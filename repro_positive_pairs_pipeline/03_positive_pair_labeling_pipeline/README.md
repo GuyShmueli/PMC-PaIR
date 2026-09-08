@@ -149,7 +149,8 @@ python scripts/run_pipeline.py verify \
   --output-dir /path/to/positive_pair_labeling_run
 ```
 
-The finalizer accepts JSON arrays, optionally wrapped in one Markdown code
+The finalizer accepts JSON arrays whose items contain exactly `pair_id`,
+`modality`, `anatomy`, and `diagnosis`, optionally wrapped in one Markdown code
 fence. It strips surrounding whitespace from descriptive fields, verifies one
 caption ID from each selected case, sorts the two caption IDs, and removes
 duplicate caption pairs. Conflicting duplicate labels are resolved
@@ -164,7 +165,7 @@ responses are not guaranteed to be identical, even with a dated model snapshot.
 
 | Final artifact | Meaning |
 |---|---|
-| `08_labeled_positive_pairs.jsonl` | Validated labels, reasoning, and source `pair_index` |
+| `labeled_positive_pairs.jsonl` | Validated labels, modality bucket, and `source_pair_index` |
 | `08_positive_pairs.json` | Deduplicated caption-ID pairs |
 | `08_text_pairs.json` | Short text labels aligned to the clean pairs |
 | `08_pairs_by_bucket.json` | Outputs grouped by modality family |

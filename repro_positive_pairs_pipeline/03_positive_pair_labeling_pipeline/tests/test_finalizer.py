@@ -42,12 +42,10 @@ class FinalizePositiveResponsesTests(unittest.TestCase):
     def positive_item(
         pair_id: list[str],
         *,
-        reasoning: str = "The captions describe the same finding.",
         modality: str = "CT scan",
     ) -> dict[str, object]:
         return {
             "pair_id": pair_id,
-            "reasoning": reasoning,
             "modality": modality,
             "anatomy": "chest",
             "diagnosis": "pulmonary lesion",
@@ -94,6 +92,13 @@ class FinalizePositiveResponsesTests(unittest.TestCase):
         with self.assertRaisesRegex(ResponseValidationError, "not a valid JSON array"):
             self.finalize("not JSON")
 
+    def test_obsolete_reasoning_field_is_rejected(self) -> None:
+        item = self.positive_item(["a1", "b1"])
+        item["reasoning"] = "The captions describe the same finding."
+
+        with self.assertRaisesRegex(ResponseValidationError, "extra=\\['reasoning'\\]"):
+            self.finalize(json.dumps([item]))
+
     def test_invalid_pair_id_shapes_and_membership_are_rejected(self) -> None:
         invalid_items = {
             "wrong shape": self.positive_item(["a1"]),
@@ -109,7 +114,6 @@ class FinalizePositiveResponsesTests(unittest.TestCase):
     def test_duplicate_json_keys_are_rejected(self) -> None:
         text = (
             '[{"pair_id":["a1","b1"],'
-            '"reasoning":"same finding",'
             '"modality":"CT scan",'
             '"modality":"MRI",'
             '"anatomy":"chest",'
@@ -121,15 +125,16 @@ class FinalizePositiveResponsesTests(unittest.TestCase):
 
     def test_duplicate_pairs_are_removed_deterministically(self) -> None:
         items = [
-            self.positive_item(["b1", "a1"], reasoning="z reason"),
-            self.positive_item(["a1", "b1"], reasoning="a reason"),
+            self.positive_item(["b1", "a1"], modality="MRI"),
+            self.positive_item(["a1", "b1"], modality="CT scan"),
         ]
 
         result = self.finalize(json.dumps(items))
 
         self.assertEqual(result["pairs_clean_all"], [["a1", "b1"]])
-        self.assertEqual(result["labeled_all"][0]["reasoning"], "a reason")
+        self.assertEqual(result["labeled_all"][0]["modality"], "CT scan")
         self.assertEqual(result["stats"]["duplicate_pairs_removed"], 1)
+        self.assertEqual(result, self.finalize(json.dumps(list(reversed(items)))))
 
     def test_ct_bucket_uses_word_boundaries(self) -> None:
         self.assertEqual(modality_bucket("activity"), "other")

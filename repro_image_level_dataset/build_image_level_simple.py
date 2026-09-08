@@ -244,7 +244,7 @@ def main():
                'scope': 'Only pair_id, modality, anatomy, diagnosis; no captions, pixels, articles or previous annotations.',
                'interpretation': 'Broad text-derived labels. Coverage and structural checks do not measure semantic accuracy. A negative-report label concerns the mentioned condition, not necessarily the whole image.'}
     args.output.mkdir(parents=True, exist_ok=True)
-    (args.output / 'images.jsonl').write_bytes(output)
+    (args.output / 'labeled_images.jsonl').write_bytes(output)
     (args.output / 'phrase_mappings.json').write_bytes(json_bytes(cache))
     with (args.output / 'unmatched_phrases.csv').open('w', newline='', encoding='utf-8') as out:
         writer = csv.writer(out)

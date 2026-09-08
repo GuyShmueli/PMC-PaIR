@@ -6,7 +6,7 @@ from typing import Any
 from .io_utils import sha256_bytes
 
 
-PROMPT_VERSION = "1.1.0"
+PROMPT_VERSION = "1.2.0"
 
 CITATION_REASONING_PROMPT = """You are a medical citation analysis assistant. Compare a citing single-patient case report with the cited single-patient case report. Return exactly three concise plain-text fields:
 
@@ -25,7 +25,7 @@ POSITIVE_PAIR_PROMPT = """You are a medical-AI expert. Evaluate every inter-case
 A pair is positive only when both captions describe the same modality family, the same pathology family, and the same anatomical region. Differences in view, plane, sequence, laterality, acuity, severity, or slice do not by themselves prevent a match. Do not collapse different pathophysiologies merely because images can look similar. Reject diagrams and illustrations.
 
 Return valid JSON only: an array whose items have exactly these keys:
-{"pair_id":["caption_id_from_case_a","caption_id_from_case_b"],"reasoning":"short explanation","modality":"shared modality family","anatomy":"shared anatomy","diagnosis":"shared pathology family"}
+{"pair_id":["caption_id_from_case_a","caption_id_from_case_b"],"modality":"shared modality family","anatomy":"shared anatomy","diagnosis":"shared pathology family"}
 
 Use caption IDs exactly as supplied. Return [] when there are no positive matches."""
 

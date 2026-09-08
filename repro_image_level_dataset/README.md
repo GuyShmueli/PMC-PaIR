@@ -1,6 +1,6 @@
 # Reproduce the simple image-level dataset
 
-This directory contains the construction code from `image_level_classification_simple`. The builder and taxonomy are unchanged copies. The verification script accepts explicit paths so it can run from this directory.
+This directory contains the construction code from `image_level_classification_simple`. The taxonomy and labeling logic are unchanged; the image dataset is exported as `labeled_images.jsonl`. The verification script accepts explicit paths so it can run from this directory.
 
 Requires Python 3.9 or newer and the Python standard library. No package installation is needed.
 
@@ -26,7 +26,7 @@ On another machine, set `IMAGE_LEVEL_PAIR_INPUT` to the location of the same inp
 
 The builder writes these files under `output/`:
 
-- `images.jsonl`: image IDs, three label groups, and contributing zero-based pair indices.
+- `labeled_images.jsonl`: image IDs, three label groups, and contributing zero-based pair indices.
 - `phrase_mappings.json`: mappings and matching evidence for distinct input phrases.
 - `unmatched_phrases.csv`: unmatched phrases and their pair frequencies.
 - `summary.json`: category distributions, coverage, structural checks, and hashes.
@@ -55,7 +55,7 @@ Only pair IDs and the modality, anatomy, and diagnosis descriptions are used. Ea
 
 The vocabulary has 12 modality, 20 anatomy, and 40 diagnosis categories, including `other`. Every image has at least one label per field. `other` is removed when a known label is available in that field.
 
-The original input contains 86,316 pairs and produces 87,105 image records. Images assigned `other` number 67 for modality, 277 for anatomy, and 2,259 for diagnosis. The expected `images.jsonl` SHA-256 is:
+The original input contains 86,316 pairs and produces 87,105 image records. Images assigned `other` number 67 for modality, 277 for anatomy, and 2,259 for diagnosis. The expected `labeled_images.jsonl` SHA-256 is:
 
 ```text
 6799e564744ca220f9480acb2b3436ed4b98d3346b3067b750736029cfad272f

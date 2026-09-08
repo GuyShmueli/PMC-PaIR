@@ -166,7 +166,7 @@ def main():
     if args.checks_only:
         return
 
-    generated = ['images.jsonl', 'phrase_mappings.json', 'unmatched_phrases.csv', 'summary.json']
+    generated = ['labeled_images.jsonl', 'phrase_mappings.json', 'unmatched_phrases.csv', 'summary.json']
     hashes = {f: digest((args.dataset_dir / f).read_bytes()) for f in generated}
     repeats = []
     for seed in ['17', '8191']:

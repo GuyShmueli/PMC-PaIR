@@ -407,7 +407,6 @@ reasoning_effort = "medium"
                     [
                         {
                             "pair_id": ["300_1_1", "400_1_1"],
-                            "reasoning": "Both depict the same modality and pathology family.",
                             "modality": "CT scan",
                             "anatomy": "lung",
                             "diagnosis": "pulmonary lesion",
@@ -428,7 +427,18 @@ reasoning_effort = "medium"
         self.assertEqual(stats["selected_pairs"], 1)
         self.assertEqual(stats["labeled_pairs_kept"], 1)
         self.assertEqual(load_json(run_dir / FINAL_PAIRS), [["300_1_1", "400_1_1"]])
-        self.assertEqual(len(load_jsonl(run_dir / FINAL_LABELED)), 1)
+        self.assertEqual(
+            load_jsonl(run_dir / "labeled_positive_pairs.jsonl"),
+            [{
+                "pair_id": ["300_1_1", "400_1_1"],
+                "modality": "CT scan",
+                "anatomy": "lung",
+                "diagnosis": "pulmonary lesion",
+                "modality_bucket": "radiology",
+                "source_pair_index": 1,
+            }],
+        )
+        self.assertFalse((run_dir / "08_labeled_positive_pairs.jsonl").exists())
         verification = verify_run(run_dir)
         self.assertEqual(verification["status"], "complete")
 
@@ -766,7 +776,6 @@ reasoning_effort = "medium"
             [
                 {
                     "pair_id": ["300_1_1", "400_1_1"],
-                    "reasoning": "Both depict the same modality and pathology family.",
                     "modality": "CT scan",
                     "anatomy": "lung",
                     "diagnosis": "pulmonary lesion",

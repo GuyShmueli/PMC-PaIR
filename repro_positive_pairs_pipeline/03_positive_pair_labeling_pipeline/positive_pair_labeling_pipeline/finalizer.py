@@ -11,7 +11,7 @@ from typing import Any
 from .errors import ResponseValidationError
 
 
-_OUTPUT_FIELDS = {"pair_id", "reasoning", "modality", "anatomy", "diagnosis"}
+_OUTPUT_FIELDS = {"pair_id", "modality", "anatomy", "diagnosis"}
 _CODE_FENCE_RE = re.compile(
     r"\A\s*```(?:json)?[^\S\r\n]*\r?\n(?P<body>.*?)\r?\n?```[^\S\r\n]*\Z",
     flags=re.IGNORECASE | re.DOTALL,
@@ -98,7 +98,7 @@ def _parse_response_array(text: Any, *, pair_index: int) -> list[dict[str, Any]]
             )
 
         normalized = {"pair_id": list(pair_id)}
-        for field in ("reasoning", "modality", "anatomy", "diagnosis"):
+        for field in ("modality", "anatomy", "diagnosis"):
             value = item[field]
             if not isinstance(value, str) or not value.strip():
                 raise ResponseValidationError(
@@ -432,7 +432,6 @@ def finalize_positive_responses(
             record["source_pair_index"],
             record["pair_id"][0],
             record["pair_id"][1],
-            record["reasoning"],
             record["modality"],
             record["anatomy"],
             record["diagnosis"],
