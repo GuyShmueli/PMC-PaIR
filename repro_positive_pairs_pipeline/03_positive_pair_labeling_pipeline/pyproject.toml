@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools==75.8.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "repro-positive-pair-labeling-pipeline"
+version = "6.1.0"
+description = "Reproducible model labeling and validation of PMC image pairs"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "openai==1.77.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["positive_pair_labeling_pipeline*"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]

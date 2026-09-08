@@ -1,0 +1,13 @@
+# Historical request payloads and generated data stay local.
+/new_batch_reqs/
+/outputs/
+
+# Local Python artifacts and credentials.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.venv/
+.env
+.env.*
+!.env.example

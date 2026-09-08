@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools==75.8.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "repro-case-pair-selection-pipeline"
+version = "6.1.0"
+description = "Reproducible evidence-backed PMC case-pair selection pipeline"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "Pillow==11.0.0",
+  "pandas==2.2.3",
+  "lxml==5.2.2",
+  "pytesseract==0.3.13",
+]
+
+[tool.setuptools.packages.find]
+include = ["case_pair_selection_pipeline*"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]

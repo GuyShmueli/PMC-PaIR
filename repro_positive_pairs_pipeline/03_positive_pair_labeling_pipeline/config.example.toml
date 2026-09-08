@@ -1,0 +1,24 @@
+schema_version = 1
+
+[batch]
+# OpenAI currently documents a 200 MB Batch JSONL ceiling. Keep headroom for
+# serialization and future metadata changes.
+max_shard_bytes = 190000000
+# This is an internal pipeline safety ceiling, not a provider request-count cap.
+max_shard_requests = 45000
+
+[models.citation]
+model = "gpt-5-mini-2025-08-07"
+reasoning_effort = "medium"
+
+[models.question]
+model = "gpt-5-mini-2025-08-07"
+reasoning_effort = "low"
+
+[models.answer]
+model = "gpt-5-mini-2025-08-07"
+reasoning_effort = "medium"
+
+[models.positive]
+model = "gpt-5-mini-2025-08-07"
+reasoning_effort = "medium"

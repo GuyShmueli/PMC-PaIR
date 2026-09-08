@@ -1,0 +1,18 @@
+schema_version = 1
+
+[diagram_filter]
+white_pixel_threshold = 250
+white_ratio_threshold = 0.5
+thumbnail_max_size = 384
+ocr_text_length_threshold = 200
+ocr_language = "eng"
+ocr_config = "--oem 1 --psm 11 -c tessedit_do_invert=0"
+ocr_timeout_seconds = 2.0
+
+[selection]
+title_fallback = false
+title_min_chars = 24
+title_min_tokens = 4
+
+[species_filter]
+ruleset = "human_animal_v1"

@@ -1,0 +1,57 @@
+{
+  "construction_script_and_taxonomy_byte_identical": true,
+  "expected_dataset": {
+    "categories_including_other": {
+      "anatomy": 20,
+      "diagnosis": 40,
+      "modality": 12
+    },
+    "images": 87105,
+    "images_jsonl_sha256": "6799e564744ca220f9480acb2b3436ed4b98d3346b3067b750736029cfad272f",
+    "other_images": {
+      "anatomy": 277,
+      "diagnosis": 2259,
+      "modality": 67
+    }
+  },
+  "expected_input": {
+    "pairs": 86316,
+    "path": "/cs/labs/tomhope/dhtandguy21/largeListsGuy/prepared_pairmed_inputs/broad_no_path_endo/pairs_no_pets_categories.json",
+    "sha256": "10feb3a9d7f348119109055b4ba20c99c8dee598e92d808464c4f0ee1049c6b6"
+  },
+  "packaged_file_sha256": {
+    ".gitignore": "6e8af9288e2d825f1d2e9d1507149635e77bfdc759b75aa094cd856cc662e6ba",
+    "README.md": "44dcb0889db876c90ca54d687f59b1e7eb7e0723540b5e78bab30dfad91bae1e",
+    "build_image_level_simple.py": "8ae8429210e778b03a95f2d7a8006914d6227cb5653e0e63a9186220404e1c8c",
+    "taxonomy.json": "5f73225d7461f8f82119c3f5b979e1a1873251c4308d4ca517b9747a80a334d7",
+    "verify_pipeline.py": "db487ac82e6a7c1c676dad65d1da12eea79520acb0451d3ddda33baae2ddd38c"
+  },
+  "packaging_validation": {
+    "compound_figure_checks_passed": true,
+    "full_source_dataset_rebuilt_for_this_copy": false,
+    "phrase_examples_passed": 96,
+    "portable_cli_smoke_check": {
+      "all_generated_artifacts_byte_identical": true,
+      "alternate_working_directory": true,
+      "independent_rebuild_hash_seeds": [
+        17,
+        8191
+      ],
+      "passed": true,
+      "paths_with_spaces": true,
+      "synthetic_images": 4,
+      "synthetic_pairs": 3
+    },
+    "python_syntax_passed": true
+  },
+  "source_directory": "/cs/labs/tomhope/dhtandguy21/largeListsGuy/prepared_pairmed_inputs/broad_no_path_endo/image_level_classification_simple",
+  "source_file_sha256": {
+    "build_image_level_simple.py": "8ae8429210e778b03a95f2d7a8006914d6227cb5653e0e63a9186220404e1c8c",
+    "taxonomy.json": "5f73225d7461f8f82119c3f5b979e1a1873251c4308d4ca517b9747a80a334d7",
+    "verify_pipeline.py": "7fbc9aa7b3fef042a633d7b173b907de53644e66f6202684b58e8713b1c82a64"
+  },
+  "verification_script_changes": [
+    "Accept explicit --input, --taxonomy, and --dataset-dir paths.",
+    "Add --checks-only to run existing phrase and aggregation checks without full rebuilds."
+  ]
+}

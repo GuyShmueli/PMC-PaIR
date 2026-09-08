@@ -1,0 +1,8 @@
+name: repro-positive-pair-labeling
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11.10
+  - pip=24.3.1
+  - pip:
+      - -r requirements-lock.txt
